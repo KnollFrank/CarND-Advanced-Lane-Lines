@@ -43,7 +43,9 @@ I then used the output `objpoints` and `imgpoints` to compute the camera calibra
 #### Distortion Correction
 
 To demonstrate this step, I will describe how I apply the distortion correction to the image `test_images/test1.jpg`:
-![alt text](output_images/test1_undistorted.png)
+![alt text](output_images/test2_ResultImage.INPUT.png)
+
+![alt text](output_images/test2_ResultImage.UNDISTORTED.png)
 
 #### Color Transforms and Gradients
 
@@ -51,7 +53,9 @@ TODO: Describe how (and identify where in your code) you used color transforms, 
 
 I used a combination of color and gradient thresholds to generate a binary image (function `create_binary_images()` in section "Use color transforms, gradients, etc., to create a thresholded binary image" in the notebook).  Here's an example of my output for this step:
 
-![binary](output_images/test1_binary.png)
+![binary](output_images/test2_ResultImage.COLOR_BINARY.png)
+
+![binary](output_images/test2_ResultImage.COMBINED_BINARY.png)
 
 #### Perspective Transform
 
@@ -61,7 +65,7 @@ The code for my perspective transform includes a function called `warpPerspectiv
 
 ```python
 src = np.float32(
-    [[(img_size[0] / 2) - 55, img_size[1] / 2 + 100],
+    [[(img_size[0] / 2) - 55, img_size*[1] / 2 + 100],
     [((img_size[0] / 6) - 10), img_size[1]],
     [(img_size[0] * 5 / 6) + 60, img_size[1]],
     [(img_size[0] / 2 + 55), img_size[1] / 2 + 100]])
@@ -85,11 +89,15 @@ I verified that my perspective transform was working as expected by drawing the 
 
 ![alt text][image4]
 
+![binary](output_images/test2_ResultImage.PERSPECTIVE.png)
+
 #### 4. Describe how (and identify where in your code) you identified lane-line pixels and fit their positions with a polynomial?
 
 Then I did some other stuff and fit my lane lines with a 2nd order polynomial kinda like this:
 
 ![alt text][image5]
+
+![binary](output_images/test2_ResultImage.LINES.png)
 
 #### 5. Describe how (and identify where in your code) you calculated the radius of curvature of the lane and the position of the vehicle with respect to center.
 
@@ -100,6 +108,8 @@ I did this in lines # through # in my code in `my_other_file.py`
 I implemented this step in lines # through # in my code in `yet_another_file.py` in the function `map_lane()`.  Here is an example of my result on a test image:
 
 ![alt text][image6]
+
+![binary](output_images/test2_ResultImage.OUTPUT.png)
 
 ---
 
