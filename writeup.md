@@ -97,6 +97,8 @@ Then I did some other stuff and fit my lane lines with a 2nd order polynomial ki
 
 ![alt text][image5]
 
+![binary](output_images/test2_ResultImage.LINES_WITH_SLIDING_WINDOWS.png)
+
 ![binary](output_images/test2_ResultImage.LINES.png)
 
 #### 5. Describe how (and identify where in your code) you calculated the radius of curvature of the lane and the position of the vehicle with respect to center.
