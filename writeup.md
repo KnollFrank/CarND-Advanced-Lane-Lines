@@ -87,7 +87,7 @@ This resulted in the following source and destination points:
 
 I verified that my perspective transform was working as expected by drawing the `src` and `dst` points onto a test image and its warped counterpart to verify that the lines appear parallel in the warped image.
 
-![alt text][image4]
+![binary](output_images/test2_warped_straight_lines.png)
 
 ![binary](output_images/test2_ResultImage.PERSPECTIVE.png)
 
