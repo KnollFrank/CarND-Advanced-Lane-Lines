@@ -45,11 +45,13 @@ I then used the output `objpoints` and `imgpoints` to compute the camera calibra
 To demonstrate this step, I will describe how I apply the distortion correction to the image `test_images/test1.jpg`:
 ![alt text](output_images/test1_undistorted.png)
 
-#### 2. Describe how (and identify where in your code) you used color transforms, gradients or other methods to create a thresholded binary image.  Provide an example of a binary image result.
+#### Apply color transforms and gradients to create a thresholded binary image
 
-I used a combination of color and gradient thresholds to generate a binary image (thresholding steps at lines # through # in `another_file.py`).  Here's an example of my output for this step.  (note: this is not actually from one of the test images)
+TODO: Describe how (and identify where in your code) you used color transforms, gradients or other methods to create a thresholded binary image. Provide an example of a binary image result.
 
-![alt text][image3]
+I used a combination of color and gradient thresholds to generate a binary image (function `create_binary_images()` in section "Use color transforms, gradients, etc., to create a thresholded binary image" in the notebook).  Here's an example of my output for this step:
+
+![binary](output_images/test1_binary.png)
 
 #### 3. Describe how (and identify where in your code) you performed a perspective transform and provide an example of a transformed image.
 
