@@ -42,7 +42,7 @@ I then used the output `objpoints` and `imgpoints` to compute the camera calibra
 
 #### Distortion Correction
 
-To demonstrate this step, I will describe how I apply the distortion correction to the image `test_images/test1.jpg`:
+To demonstrate this step, I will describe how I apply the distortion correction to the image `test_images/test2.jpg`:
 ![alt text](output_images/test2_ResultImage.INPUT.png)
 
 ![alt text](output_images/test2_ResultImage.UNDISTORTED.png)
@@ -95,8 +95,6 @@ I verified that my perspective transform was working as expected by drawing the 
 
 Then I did some other stuff and fit my lane lines with a 2nd order polynomial kinda like this:
 
-![alt text][image5]
-
 ![binary](output_images/test2_ResultImage.LINES_WITH_SLIDING_WINDOWS.png)
 
 ![binary](output_images/test2_ResultImage.LINES.png)
@@ -108,8 +106,6 @@ I did this in lines # through # in my code in `my_other_file.py`
 #### 6. Provide an example image of your result plotted back down onto the road such that the lane area is identified clearly.
 
 I implemented this step in lines # through # in my code in `yet_another_file.py` in the function `map_lane()`.  Here is an example of my result on a test image:
-
-![alt text][image6]
 
 ![binary](output_images/test2_ResultImage.OUTPUT.png)
 
