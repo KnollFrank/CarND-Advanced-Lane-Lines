@@ -61,19 +61,23 @@ I used a combination of color and gradient thresholds to generate a binary image
 
 TODO: Describe how (and identify where in your code) you performed a perspective transform and provide an example of a transformed image.
 
-The code for my perspective transform includes a function called `warpPerspective()`, which appears in section "Apply a perspective transform to rectify binary image ("birds-eye view")" of the IPython notebook. The `warpPerspective()` function takes as inputs an image (`image`), as well as source (`src`) and destination (`dst`) points.  I chose the hardcode the source and destination points in the following manner:
+The code for my perspective transform includes a function called `warpPerspective()`, which appears in section "Apply a perspective transform to rectify binary image ("birds-eye view")" of the IPython notebook. The `warpPerspective()` function takes as inputs an image (`image`), as well as source (`src`) and destination (`dst`) points.  I chose to hardcode the source and destination points in the following manner:
 
 ```python
 src = np.float32(
-    [[(img_size[0] / 2) - 55, img_size*[1] / 2 + 100],
-    [((img_size[0] / 6) - 10), img_size[1]],
-    [(img_size[0] * 5 / 6) + 60, img_size[1]],
-    [(img_size[0] / 2 + 55), img_size[1] / 2 + 100]])
+    [
+        ((get_width(img) / 2) - 55, get_height(img) / 2 + 100),
+        (((get_width(img) / 6) - 10), get_height(img)),
+        ((get_width(img) * 5 / 6) + 60, get_height(img)),
+        ((get_width(img) / 2 + 55), get_height(img) / 2 + 100)
+    ])
 dst = np.float32(
-    [[(img_size[0] / 4), 0],
-    [(img_size[0] / 4), img_size[1]],
-    [(img_size[0] * 3 / 4), img_size[1]],
-    [(img_size[0] * 3 / 4), 0]])
+    [
+        ((get_width(img) / 4), 0),
+        ((get_width(img) / 4), get_height(img)),
+        ((get_width(img) * 3 / 4), get_height(img)),
+        ((get_width(img) * 3 / 4), 0)
+    ])
 ```
 
 This resulted in the following source and destination points:
