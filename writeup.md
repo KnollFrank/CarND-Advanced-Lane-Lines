@@ -40,10 +40,18 @@ I then used the output `objpoints` and `imgpoints` to compute the camera calibra
 
 ### Pipeline (single images)
 
+The pipeline starts receiving an image like this one (`test_images/test2.jpg`):
+
+![alt text](output_images/test2_Image.INPUT.png)
+
 #### Distortion Correction
 
-To demonstrate this step, I will describe how I apply the distortion correction to the image `test_images/test2.jpg`:
-![alt text](output_images/test2_Image.INPUT.png)
+TODO:
+- describe how I apply the distortion correction to the image
+- linkes unteres Rechteck (0, 680) - (200, 720) aus dem Originalbild und dem undistorted Bild ausschneiden und anzeigen. Unterschiede beschreiben.
+- Code: `undistort(image, calibration_data)` im notebook
+
+Then the input image is distortion corrected using the `cv2.undistort()` function applied to the calibration and distortion coefficients obtained from the `cv2.calibrateCamera()` function as described in the section "Camera Calibration". This results in the following distortion corrected image:
 
 ![alt text](output_images/test2_Image.UNDISTORTED.png)
 
@@ -125,7 +133,7 @@ I implemented this step in lines # through # in my code in `yet_another_file.py`
 
 ### Pipeline (video)
 
-#### 1. Provide a link to your final video output.  Your pipeline should perform reasonably well on the entire project video (wobbly lines are ok but no catastrophic failures that would cause the car to drive off the road!).
+TODO: 1. Provide a link to your final video output.  Your pipeline should perform reasonably well on the entire project video (wobbly lines are ok but no catastrophic failures that would cause the car to drive off the road!).
 
 Here's a [link to my video result](./project_video.mp4)
 
@@ -133,6 +141,6 @@ Here's a [link to my video result](./project_video.mp4)
 
 ### Discussion
 
-#### 1. Briefly discuss any problems / issues you faced in your implementation of this project.  Where will your pipeline likely fail?  What could you do to make it more robust?
+TODO: Briefly discuss any problems / issues you faced in your implementation of this project.  Where will your pipeline likely fail?  What could you do to make it more robust?
 
 Here I'll talk about the approach I took, what techniques I used, what worked and why, where the pipeline might fail and how I might improve it if I were going to pursue this project further.  
