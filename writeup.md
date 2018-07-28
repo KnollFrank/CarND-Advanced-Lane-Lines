@@ -104,16 +104,13 @@ Then the perspective transform `M` is applied to the binary image from the last 
 
 #### Lane Lines
 
-TODO:
-- Describe how (and identify where in your code) you identified lane-line pixels and fit their positions with a polynomial?
-- identify lane-line pixels: `find_lane_pixels()`, how?
-- fit their positions with a polynomial: `fit_polynomial()`, how?
+The aim is to represent a lane line by a 2nd order polynomial.
 
-Then I did some other stuff and fit my lane lines with a 2nd order polynomial kinda like this:
+First, lane-line pixels (red and blue pixels in the image below) are identified by the function `find_lane_pixels()` taken from the lecture "Finding the Lines: Sliding Window": A histogram is used to find the x-position of the base of the lane lines. Then by using a sliding window (green rectangles in the image below), placed around the line centers, the lines are followed up to the top of the frame.
+
+Then the function `fit_polynomial()` fits a 2nd order polynomial to the just identified lane line pixels using numpy's function `polyfit()`, finally returning a 2nd order polynomial for each lane line (yellow pixels in the image below).
 
 ![binary](output_images/test2_Image.LINES_WITH_SLIDING_WINDOWS.png)
-
-![binary](output_images/test2_Image.LINES.png)
 
 #### Radius of Curvature
 
