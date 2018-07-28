@@ -61,7 +61,7 @@ TODO:
 - Describe how (and identify where in your code) you used color transforms, gradients or other methods to create a thresholded binary image.
 - (+) Provide an example of a binary image result.
 - Code `create_binary_images()`:
-  1. use the Sobel operator to obtain the derivative in x direction of the l-channel (warum l-channel?) of the image, `x_derivative_thresholds = (20, 100)`. So we get vertical edges which comes close to my understanding of a lane lines. (green)
+  1. use the Sobel operator to obtain the derivative in x direction of the l-channel (warum l-channel?) of the image, `x_derivative_thresholds = (20, 100)`. So we get vertical edges which comes close to my understanding of lane lines. (green)
   2. apply `s_channel_thresholds = (170, 255)` to the s-channel of the image. (blue)
 
 I used a combination of color and gradient thresholds to generate a binary image (function `create_binary_images()` in section "Use color transforms, gradients, etc., to create a thresholded binary image" in the notebook).  Here's an example of my output for this step:
@@ -72,7 +72,8 @@ I used a combination of color and gradient thresholds to generate a binary image
 
 #### Perspective Transform
 
-TODO: Describe how (and identify where in your code) you performed a perspective transform and provide an example of a transformed image.
+TODO:
+- Describe how (and identify where in your code) you performed a perspective transform and provide an example of a transformed image.
 
 The code for my perspective transform includes a function called `warpPerspective()`, which appears in section "Apply a perspective transform to rectify binary image ("birds-eye view")" of the IPython notebook. The `warpPerspective()` function takes as inputs an image (`image`), as well as source (`src`) and destination (`dst`) points.  I chose to hardcode the source and destination points in the following manner:
 
@@ -110,7 +111,10 @@ I verified that my perspective transform was working as expected by drawing the 
 
 #### Lane Lines
 
-TODO: Describe how (and identify where in your code) you identified lane-line pixels and fit their positions with a polynomial?
+TODO:
+- Describe how (and identify where in your code) you identified lane-line pixels and fit their positions with a polynomial?
+- identify lane-line pixels: `find_lane_pixels()`, how?
+- fit their positions with a polynomial: `fit_polynomial()`, how?
 
 Then I did some other stuff and fit my lane lines with a 2nd order polynomial kinda like this:
 
@@ -120,15 +124,22 @@ Then I did some other stuff and fit my lane lines with a 2nd order polynomial ki
 
 #### Radius of Curvature
 
-TODO: Describe how (and identify where in your code) you calculated the radius of curvature of the lane and the position of the vehicle with respect to center.
+TODO:
+- Describe how (and identify where in your code) you calculated the radius of curvature of the lane and the position of the vehicle with respect to center.
+- Code: `get_curvature()` = (left_curverad + right_curverad)/2
 
 I did this in lines # through # in my code in `my_other_file.py`
 
 #### Vehicle Position
 
+TODO:
+- Code: `get_vehicle_position()` =  get_center_of_car() - get_midpoint_of_lane()
+
 #### Lane Area on Road
 
-TODO: Provide an example image of your result plotted back down onto the road such that the lane area is identified clearly.
+TODO:
+- Provide an example image of your result plotted back down onto the road such that the lane area is identified clearly.
+- Code: `project_lane_area_onto_undistorted_image()`
 
 I implemented this step in lines # through # in my code in `yet_another_file.py` in the function `map_lane()`.  Here is an example of my result on a test image:
 
@@ -140,7 +151,7 @@ I implemented this step in lines # through # in my code in `yet_another_file.py`
 
 TODO: 1. Provide a link to your final video output.  Your pipeline should perform reasonably well on the entire project video (wobbly lines are ok but no catastrophic failures that would cause the car to drive off the road!).
 
-Here's a [link to my video result](./project_video.mp4)
+Here's a [link to my video result](test_videos_output/project_video.mp4)
 
 ---
 
