@@ -50,13 +50,13 @@ This results in the following distortion corrected image:
 
 #### Color Transforms and Gradients
 
-By using a combination of color and gradient thresholds, the function `create_binary_images()` generates a binary image, where pixels belonging to lane lines (among others like e.g. trees) are drawn white:
-- The function applies a threshold to the S channel of the distortion corrected input image to retain pixels having S channel values between 170 and 255. The result is colored blue in the image below.
-- By using the Sobel operator the function obtains the derivative in x direction of the L channel of the distortion corrected input image, rescales the x-derivative to the interval [0, 255] and applies a threshold to retain pixels having a scaled derivative between 20 and 100. The result is colored green in the image below. This derivative step detects vertical edges which comes close to my understanding of lane lines.
-
-Here's an example of my output for this step:
+By using a combination of color and gradient thresholds, the function `create_binary_images()` generates an image, where pixels belonging to lane lines (among other things like e.g. trees) are drawn blue and green:
+- **color thresholds:** The function applies a threshold to the S channel of the distortion corrected input image to retain pixels having S channel values between 170 and 255. The retained pixels are colored blue in the image below.
+- **gradient thresholds:** By using the Sobel operator the function obtains the derivative in x direction of the L channel of the distortion corrected input image, rescales the x-derivative to the interval [0, 255] and applies a threshold to retain pixels having a scaled derivative between 20 and 100. The retained pixels are colored green in the image below. This derivative step detects vertical edges which comes close to my understanding of lane lines.
 
 ![binary](output_images/test2_Image.COLOR_BINARY.png)
+
+In order to obtain a binary image, the green and blue pixels are colored white and the rest black. This results in the following final image for this step:
 
 ![binary](output_images/test2_Image.COMBINED_BINARY.png)
 
