@@ -114,14 +114,14 @@ Then the function `fit_polynomial()` fits a 2nd order polynomial to the just ide
 
 #### Radius of Curvature
 
-The [radius of curvature](https://www.intmath.com/applications-differentiation/8-radius-curvature.php) of a lane line is the radius of a circular arc which best approximates the lane line at the car's current position. There is a radius of curvature for each of the two lane lines identified in the previous section, so taking the average of the two radiuses results in the final radius of curvature of a car located in the middle inbetween the two lane lines (see `get_radius_of_curvature()`).
+The [radius of curvature](https://www.intmath.com/applications-differentiation/8-radius-curvature.php) of a lane line is the radius of a circular arc which best approximates the lane line at the car's current position. There is a radius of curvature for each of the two lane lines identified in the previous section, so taking the average of the two radiuses results in the final radius of curvature of a car located in the middle inbetween the two lane lines (see `get_radius_of_curvature()`). An example of the radius of curvature can be seen in the image of the section "Lane Area on Road".
 
 #### Vehicle Position
 
 The "Tips and Tricks for the Project" lecture says:
 > You can assume the camera is mounted at the center of the car, such that the lane center is the midpoint at the bottom of the image between the two lines you've detected. The offset (= vehicle position) of the lane center from the center of the image (converted from pixels to meters) is your distance from the center of the lane.
 
-So the function `get_vehicle_position()` essentially computes and returns `get_center_of_car() - get_midpoint_of_lane()`.
+So the function `get_vehicle_position()` essentially computes and returns `get_center_of_car() - get_midpoint_of_lane()`. An example of the vehicle position can be seen in the image of the section "Lane Area on Road".
 
 #### Lane Area on Road
 
