@@ -92,7 +92,7 @@ This results in the following source and destination points:
 | (1126.6666,   720) |     (960, 720)     |
 |     (695, 460)     |      (960, 0)      |
 
-I verified that my perspective transform was working as expected by drawing the `src` and `dst` points onto the test image `test_images/straight_lines1.jpg` and its warped counterpart to verify that the lines appear parallel in the warped image:
+I verified that the perspective transform was working as expected by drawing the `src` and `dst` points onto the test image `test_images/straight_lines1.jpg` and its warped counterpart to verify that the lines appear parallel in the warped image:
 
 ![binary](output_images/test2_warped_straight_lines.png)
 
@@ -114,16 +114,14 @@ Then the function `fit_polynomial()` fits a 2nd order polynomial to the just ide
 
 #### Radius of Curvature
 
-TODO:
-- Describe how (and identify where in your code) you calculated the radius of curvature of the lane and the position of the vehicle with respect to center.
-- Code: `get_curvature()` = (left_curverad + right_curverad)/2
-
-I did this in lines # through # in my code in `my_other_file.py`
+The [radius of curvature](https://www.intmath.com/applications-differentiation/8-radius-curvature.php) of a lane line is the radius of a circular arc which best approximates the lane line at the car's current position. There is a radius of curvature for each of the two lane lines identified in the previous section, so taking the average of the two radiuses results in the final radius of curvature of a car located in the middle inbetween the two lane lines (see `get_radius_of_curvature()`).
 
 #### Vehicle Position
 
-TODO:
-- Code: `get_vehicle_position()` =  get_center_of_car() - get_midpoint_of_lane()
+The "Tips and Tricks for the Project" lecture says:
+> You can assume the camera is mounted at the center of the car, such that the lane center is the midpoint at the bottom of the image between the two lines you've detected. The offset (= vehicle position) of the lane center from the center of the image (converted from pixels to meters) is your distance from the center of the lane.
+
+So the function `get_vehicle_position()` essentially computes and returns `get_center_of_car() - get_midpoint_of_lane()`.
 
 #### Lane Area on Road
 
