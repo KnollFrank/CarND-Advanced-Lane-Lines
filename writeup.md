@@ -1,6 +1,6 @@
 # Advanced Lane Finding Project
 
-The goals / steps of this project are the following:
+The goal of this project is to write a software pipeline to identify the lane boundaries in a video from a front-facing camera on a car. In order to achieve this goal, the following steps are performed:
 
 * Compute the camera calibration matrix and distortion coefficients given a set of chessboard images.
 * Apply a distortion correction to raw images.
@@ -11,10 +11,7 @@ The goals / steps of this project are the following:
 * Warp the detected lane boundaries back onto the original image.
 * Output visual display of the lane boundaries and numerical estimation of lane curvature and vehicle position.
 
-TODO:
-- [Rubric](https://review.udacity.com/#!/rubrics/571/view) Points
-- Here I will consider the rubric points individually and describe how I addressed each point in my implementation.
-- [Template writeup](https://github.com/udacity/CarND-Advanced-Lane-Lines/blob/master/writeup_template.md)
+The following sections consider these steps individually and describe how each point in the implementation is addressed.
 
 ### Camera Calibration
 
