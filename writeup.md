@@ -133,7 +133,7 @@ Finally, the function `project_lane_area_onto_undistorted_image()` plots the lan
 
 ### Pipeline (video)
 
-The pipeline operating on a single image described in the previous sections is now applied to each image of the video `test_videos/project_video.mp4` using the function `process_video()`. Here's a [link to the video result](test_videos_output/project_video.mp4).
+The pipeline operating on a single image described in the previous sections is now applied to each image of the video `test_videos/project_video.mp4` using the function `process_video()`. Here's a [link to the video result](test_videos_output/project_video.mp4). As can be seen in the video, the pipeline performs reasonably well, unfortunately showing some wobbly lines but no catastrophic failures that would cause the car to drive off the road.
 
 ### Discussion
 
