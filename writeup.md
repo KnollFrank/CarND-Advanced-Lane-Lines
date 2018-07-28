@@ -50,14 +50,11 @@ This results in the following distortion corrected image:
 
 #### Color Transforms and Gradients
 
-TODO:
-- Describe how (and identify where in your code) you used color transforms, gradients or other methods to create a thresholded binary image.
-- (+) Provide an example of a binary image result.
-- Code `create_binary_images()`:
-  1. use the Sobel operator to obtain the derivative in x direction of the l-channel (warum l-channel?) of the image, `x_derivative_thresholds = (20, 100)`. So we get vertical edges which comes close to my understanding of lane lines. (green)
-  2. apply `s_channel_thresholds = (170, 255)` to the s-channel of the image. (blue)
+By using a combination of color and gradient thresholds, the function `create_binary_images()` generates a binary image, where pixels belonging to lane lines (among others like e.g. trees) are drawn white:
+- The function applies a threshold to the S channel of the distortion corrected input image to retain pixels having S channel values between 170 and 255. The result is colored blue in the image below.
+- By using the Sobel operator the function obtains the derivative in x direction of the L channel of the distortion corrected input image, rescales the x-derivative to the interval [0, 255] and applies a threshold to retain pixels having a scaled derivative between 20 and 100. The result is colored green in the image below. This derivative step detects vertical edges which comes close to my understanding of lane lines.
 
-I used a combination of color and gradient thresholds to generate a binary image (function `create_binary_images()` in section "Use color transforms, gradients, etc., to create a thresholded binary image" in the notebook).  Here's an example of my output for this step:
+Here's an example of my output for this step:
 
 ![binary](output_images/test2_Image.COLOR_BINARY.png)
 
