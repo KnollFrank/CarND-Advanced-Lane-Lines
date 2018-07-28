@@ -15,8 +15,6 @@ The following sections consider these steps individually and describe how each p
 
 ### Camera Calibration
 
-TODO: Briefly state how you computed the camera matrix and distortion coefficients. Provide an example of a distortion corrected calibration image.
-
 The code for this step is contained in the code cells belonging to section "Compute the camera calibration matrix and distortion coefficients given a set of chessboard images" of the IPython notebook located in `./AdvancedLaneLines.ipynb`).  
 
 I start by preparing "object points", which will be the (x, y, z) coordinates of the chessboard corners in the world. Here I am assuming the chessboard is fixed on the (x, y) plane at z=0, such that the object points are the same for each calibration image.  Thus, `objp` is just a replicated array of coordinates, and `objpoints` will be appended with a copy of it every time I successfully detect all chessboard corners in a test image.  `imgpoints` will be appended with the (x, y) pixel position of each of the corners in the image plane with each successful chessboard detection.  
@@ -27,18 +25,26 @@ I then used the output `objpoints` and `imgpoints` to compute the camera calibra
 
 ### Pipeline (single images)
 
-The pipeline starts receiving an image like this one (`test_images/test2.jpg`):
+The pipeline starts receiving an image (e.g. `test_images/test2.jpg` having a yellow left lane line and a white right lane line):
 
 ![alt text](output_images/test2_Image.INPUT.png)
 
 #### Distortion Correction
 
 TODO:
-- describe how I apply the distortion correction to the image
 - linkes unteres Rechteck (0, 680) - (200, 720) aus dem Originalbild und dem undistorted Bild ausschneiden und anzeigen. Unterschiede beschreiben.
-- Code: `undistort(image, calibration_data)` im notebook
 
-Then the input image is distortion corrected using the `cv2.undistort()` function applied to the calibration and distortion coefficients obtained from the `cv2.calibrateCamera()` function as described in the section "Camera Calibration". This results in the following distortion corrected image:
+Then the input image is distortion corrected by applying the `cv2.undistort()` function to the distorted input `image` and the calibration `calibration_data['cameraMatrix']` and distortion coefficients `calibration_data['distCoeffs']` (which were obtained from the `cv2.calibrateCamera()` function as described in the section "Camera Calibration"):
+
+```python
+def undistort(image, calibration_data):
+    return cv2.undistort(image,
+                         calibration_data['cameraMatrix'],
+                         calibration_data['distCoeffs'],
+                         None,
+                         calibration_data['cameraMatrix']
+```
+This results in the following distortion corrected image:
 
 ![alt text](output_images/test2_Image.UNDISTORTED.png)
 
