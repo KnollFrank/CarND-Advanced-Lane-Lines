@@ -102,7 +102,7 @@ I verified that the perspective transform was working as expected by drawing the
 
 Then the perspective transform `M` is applied to the binary image from the last section  using `cv2.warpPerspective(image, M)` in order to obtain a rectified birds-eye view of the lane lines:
 
-![binary](output_images/test2_Image.PERSPECTIVE.png)
+![binary](output_images/test2_Image.PERSPECTIVE_COMBINED_BINARY.png)
 
 #### Lane Lines
 
@@ -137,6 +137,18 @@ The pipeline operating on a single image described in the previous sections is n
 
 ### Discussion
 
-TODO: Briefly discuss any problems / issues you faced in your implementation of this project. Where will your pipeline likely fail?  What could you do to make it more robust?
+When applied to the image `test_images/test1.jpg`, the pipeline fails to recognize the right lane line by reaching too far into the adjacent lane:
 
-Here I'll talk about the approach I took, what techniques I used, what worked and why, where the pipeline might fail and how I might improve it if I were going to pursue this project further.  
+![](output_images/test1_Image.LINES.png)
+
+A symptom of this failure can be seen in the following intermediate image from the pipeline, where the lane lines are not parallel, i.e. the left lane line correctly describes a right turn whereas the right lane line erroneously describes a left turn:
+
+![](output_images/test1_Image.LINES_WITH_SLIDING_WINDOWS.png)
+
+By comparing the last two images, it can be seen that the derived right lane line is trying to fit the blue pixels (obtained from the `find_lane_pixels()` function), which are not part of the real right lane line but belong to the car on the adjacent lane.
+
+So improving the previous stages of the pipeline which led to the non-parallel lane lines, especially the thresholds of the Sobel operator and the thresholds of the S channel, could make the pipeline more robust.
+
+The pipeline also fails miserably at the videos `test_videos/challenge_video.mp4` and `test_videos/harder_challenge_video.mp4`.
+
+A definition of the lane lines underlying the implementation of this project maybe could start like this: "A lane line is a 2nd order polynomial fitted through pixels which have passed thresholds applied to x-derivatives and color channels, ...". But as shown, this definition fails miserably in many cases. So maybe using machine learning algorithms which learn from images where the lane lines are explicitely labeled by a human could improve lane line recognition.
