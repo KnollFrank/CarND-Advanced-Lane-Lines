@@ -62,11 +62,11 @@ In order to obtain a binary image, the green and blue pixels are colored white a
 
 #### Perspective Transform
 
-TODO:
-- Describe how (and identify where in your code) you performed a perspective transform and provide an example of a transformed image.
+A perspective transform is applied to the binary image from the last section in order to obtain a rectified birds-eye view of the image.
 
-The code for my perspective transform includes a function called `warpPerspective()`, which appears in section "Apply a perspective transform to rectify binary image ("birds-eye view")" of the IPython notebook. The `warpPerspective()` function takes as inputs an image (`image`), as well as source (`src`) and destination (`dst`) points.  I chose to hardcode the source and destination points in the following manner:
+##### Calculate Perspective Transform
 
+First the function `warpPerspective(image)` calculates a perspective transform `M` from the following hard coded source and destination points of the _test_ image `test_images/straight_lines1.jpg` using `cv2.getPerspectiveTransform(src, dst)`:
 ```python
 src = np.float32(
     [
@@ -83,8 +83,7 @@ dst = np.float32(
         ((get_width(img) * 3 / 4), 0)
     ])
 ```
-
-This resulted in the following source and destination points:
+This results in the following source and destination points:
 
 |   Source (x, y)    | Destination (x, y) |
 |:------------------:|:------------------:|
@@ -93,9 +92,13 @@ This resulted in the following source and destination points:
 | (1126.6666,   720) |     (960, 720)     |
 |     (695, 460)     |      (960, 0)      |
 
-I verified that my perspective transform was working as expected by drawing the `src` and `dst` points onto a test image and its warped counterpart to verify that the lines appear parallel in the warped image.
+I verified that my perspective transform was working as expected by drawing the `src` and `dst` points onto the test image `test_images/straight_lines1.jpg` and its warped counterpart to verify that the lines appear parallel in the warped image:
 
 ![binary](output_images/test2_warped_straight_lines.png)
+
+##### Apply Perspective Transform
+
+Then the perspective transform `M` is applied to the binary image from the last section  using `cv2.warpPerspective(image, M)` in order to obtain a rectified birds-eye view of the lane lines:
 
 ![binary](output_images/test2_Image.PERSPECTIVE.png)
 
