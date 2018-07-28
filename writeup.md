@@ -125,11 +125,7 @@ So the function `get_vehicle_position()` essentially computes and returns `get_c
 
 #### Lane Area on Road
 
-TODO:
-- Provide an example image of your result plotted back down onto the road such that the lane area is identified clearly.
-- Code: `project_lane_area_onto_undistorted_image()`
-
-I implemented this step in lines # through # in my code in `yet_another_file.py` in the function `map_lane()`.  Here is an example of my result on a test image:
+Finally, the function `project_lane_area_onto_undistorted_image()` plots the lane area between the left and right lane lines back down onto the road of the undistorted image (using the inverse of the perspective transform obtained in section "Perspective Transform"), such that the lane area is identified clearly as a green filled polygon:
 
 ![binary](output_images/test2_Image.OUTPUT.png)
 
