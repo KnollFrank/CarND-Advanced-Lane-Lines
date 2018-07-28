@@ -13,6 +13,8 @@ The goal of this project is to write a software pipeline to identify the lane bo
 
 The following sections consider these steps individually and describe how each point in the implementation is addressed.
 
+The python code is located in the IPython notebook `AdvancedLaneLines.ipynb`. The function executing all the steps of the pipeline is `pipeline(image)`.
+
 ### Camera Calibration
 
 The code for this step is contained in the code cells belonging to section "Compute the camera calibration matrix and distortion coefficients given a set of chessboard images" of the IPython notebook located in `./AdvancedLaneLines.ipynb`).  
@@ -129,15 +131,9 @@ Finally, the function `project_lane_area_onto_undistorted_image()` plots the lan
 
 ![binary](output_images/test2_Image.OUTPUT.png)
 
----
-
 ### Pipeline (video)
 
-TODO: 1. Provide a link to your final video output.  Your pipeline should perform reasonably well on the entire project video (wobbly lines are ok but no catastrophic failures that would cause the car to drive off the road!).
-
-Here's a [link to my video result](test_videos_output/project_video.mp4)
-
----
+The pipeline operating on a single image described in the previous sections is now applied to each image of the video `test_videos/project_video.mp4` using the function `process_video()`. Here's a [link to the video result](test_videos_output/project_video.mp4).
 
 ### Discussion
 
