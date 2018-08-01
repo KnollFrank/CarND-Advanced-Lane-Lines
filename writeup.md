@@ -29,7 +29,7 @@ I then used the output `objpoints` and `imgpoints` to compute the camera calibra
 
 The pipeline starts receiving an image (e.g. `test_images/test2.jpg` having a yellow left lane line and a white right lane line):
 
-![alt text](output_images/test2_Entity.INPUT.png)
+![alt text](output_images/test2_INPUT.png)
 
 #### Distortion Correction
 
@@ -45,7 +45,7 @@ def undistort(image, calibration_data):
 ```
 This results in the following distortion corrected image:
 
-![alt text](output_images/test2_Entity.UNDISTORTED.png)
+![alt text](output_images/test2_UNDISTORTED.png)
 
 #### Color Transforms and Gradients
 
@@ -53,11 +53,11 @@ By using a combination of color and gradient thresholds, the function `create_bi
 - **color thresholds:** `create_binary_images()` applies a threshold to the S channel of the distortion corrected input image in order to retain pixels having S channel values between 170 and 255. The retained pixels are colored blue in the image below.
 - **gradient thresholds:** By using the Sobel operator `create_binary_images()` obtains the derivative in x direction of the L channel of the distortion corrected input image, rescales the x-derivative to the interval [0, 255] and applies a threshold to retain pixels having a scaled derivative between 20 and 100. The retained pixels are colored green in the image below. This derivative step detects vertical edges, which comes close to my understanding of lane lines.
 
-![binary](output_images/test2_Entity.COLOR_BINARY.png)
+![binary](output_images/test2_COLOR_BINARY.png)
 
 In order to obtain a binary image, the green and blue pixels are colored white and the rest black. This results in the following final image for this step:
 
-![binary](output_images/test2_Entity.COMBINED_BINARY.png)
+![binary](output_images/test2_COMBINED_BINARY.png)
 
 #### Perspective Transform
 
@@ -99,7 +99,7 @@ I verified that the perspective transform was working as expected by drawing the
 
 Then the perspective transform `M` is applied to the binary image from the last section  using `cv2.warpPerspective(image, M)` in order to obtain a rectified birds-eye view of the lane lines:
 
-![binary](output_images/test2_Entity.PERSPECTIVE_COMBINED_BINARY.png)
+![binary](output_images/test2_PERSPECTIVE_COMBINED_BINARY.png)
 
 #### Lane Lines
 
@@ -109,7 +109,7 @@ First, lane-line pixels (red and blue pixels in the image below) are identified 
 
 Then the function `fit_polynomial()` fits a 2nd order polynomial to the just identified lane line pixels using numpy's function `polyfit()`, finally returning a 2nd order polynomial for each lane line (yellow pixels in the image below).
 
-![binary](output_images/test2_Entity.LINES_WITH_SLIDING_WINDOWS.png)
+![binary](output_images/test2_LINES_WITH_SLIDING_WINDOWS.png)
 
 #### Radius of Curvature
 
@@ -126,7 +126,7 @@ So the function `get_vehicle_position()` essentially computes and returns `get_c
 
 Finally, the function `project_lane_area_onto_undistorted_image()` plots the lane area between the left and right lane lines back down onto the road of the undistorted image (using the inverse of the perspective transform obtained in section "Perspective Transform"), such that the lane area is identified clearly as a green filled polygon:
 
-![binary](output_images/test2_Entity.OUTPUT.png)
+![binary](output_images/test2_OUTPUT.png)
 
 ### Pipeline (video)
 
@@ -136,11 +136,11 @@ The pipeline operating on a single image described in the previous sections is a
 
 When applied to the image `test_images/test1.jpg`, the pipeline fails to recognize the right lane line by reaching too far into the adjacent lane:
 
-![](output_images/test1_Entity.LINES.png)
+![](output_images/test1_LINES.png)
 
 A symptom of this failure can be seen in the following intermediate image from the pipeline, where the lane lines are not parallel, i.e. the left lane line correctly describes a right turn whereas the right lane line erroneously describes a left turn:
 
-![](output_images/test1_Entity.LINES_WITH_SLIDING_WINDOWS.png)
+![](output_images/test1_LINES_WITH_SLIDING_WINDOWS.png)
 
 By comparing the last two images with each other, it can be seen that the derived right lane line is trying to fit the blue pixels (obtained from the `find_lane_pixels()` function), which are not part of the real right lane line but belong to the car on the adjacent lane.
 
