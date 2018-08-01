@@ -51,7 +51,7 @@ This results in the following distortion corrected image:
 
 By using a combination of color and gradient thresholds, the function `create_binary_images()` generates an image, where pixels belonging to lane lines (among other things like e.g. trees) are drawn blue and green:
 - **color thresholds:** `create_binary_images()` applies a threshold to the S channel of the distortion corrected input image in order to retain pixels having S channel values between 170 and 255. The retained pixels are colored blue in the image below.
-- **gradient thresholds:** By using the Sobel operator `create_binary_images()` obtains the derivative in x direction of the L channel of the distortion corrected input image, rescales the x-derivative to the interval [0, 255] and applies a threshold to retain pixels having a scaled derivative between 20 and 100. The retained pixels are colored green in the image below. This derivative step detects vertical edges, which comes close to my understanding of lane lines.
+- **gradient thresholds:** By using the Sobel operator `create_binary_images()` obtains the derivative in x direction of the L channel of the distortion corrected input image, rescales the x-derivative to the interval [0, 255] and applies a threshold to retain pixels having a scaled derivative between 60 and 100. The retained pixels are colored green in the image below. This derivative step detects vertical edges, which comes close to my understanding of lane lines.
 
 ![binary](output_images/test2_COLOR_BINARY.png)
 
@@ -65,31 +65,31 @@ A perspective transform is applied to the binary image from the last section in 
 
 ##### Calculate Perspective Transform
 
-First the function `warpPerspective(image)` calculates a perspective transform `M` from the following hard coded source and destination points of the _test_ image `test_images/straight_lines1.jpg` using `cv2.getPerspectiveTransform(src, dst)`:
+First the function `warpPerspective(image)` calculates a perspective transform `M` from the following hard coded source and destination points of the _test_ image `test_images/straight_lines2.jpg` using `cv2.getPerspectiveTransform(src, dst)`:
 ```python
 src = np.float32(
     [
-        ((get_width(img) / 2) - 55, get_height(img) / 2 + 100),
-        (((get_width(img) / 6) - 10), get_height(img)),
-        ((get_width(img) * 5 / 6) + 60, get_height(img)),
-        ((get_width(img) / 2 + 55), get_height(img) / 2 + 100)
+        (get_width(img)/2 - 60, get_height(img)/2 + 100),
+        (get_width(img)/6 + 5, get_height(img)),
+        (get_width(img)*5/6 + 45, get_height(img)),
+        (get_width(img)/2 + 65, get_height(img)/2 + 100)
     ])
 dst = np.float32(
     [
-        ((get_width(img) / 4), 0),
-        ((get_width(img) / 4), get_height(img)),
-        ((get_width(img) * 3 / 4), get_height(img)),
-        ((get_width(img) * 3 / 4), 0)
+        (get_width(img)/4, 0),
+        (get_width(img)/4, get_height(img)),
+        (get_width(img)*3/4, get_height(img)),
+        (get_width(img)*3/4, 0)
     ])
 ```
 This results in the following source and destination points:
 
 |   Source (x, y)    | Destination (x, y) |
 |:------------------:|:------------------:|
-|     (585, 460)     |      (320, 0)      |
-| (203.33333,   720) |     (320, 720)     |
-| (1126.6666,   720) |     (960, 720)     |
-|     (695, 460)     |      (960, 0)      |
+|     (580, 460)     |      (320, 0)      |
+| (218.33333,   720) |     (320, 720)     |
+| (1111.6666,   720) |     (960, 720)     |
+|     (705, 460)     |      (960, 0)      |
 
 I verified that the perspective transform was working as expected by drawing the `src` and `dst` points onto the test image `test_images/straight_lines1.jpg` and its warped counterpart to verify that the lines appear parallel in the warped image:
 
