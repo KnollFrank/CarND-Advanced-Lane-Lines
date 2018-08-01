@@ -130,21 +130,25 @@ Finally, the function `project_lane_area_onto_undistorted_image()` plots the lan
 
 ### Pipeline (video)
 
+TODO:
+- explain weighted average over n frames
+- explain outlier detection
+
 The pipeline operating on a single image described in the previous sections is applied to each image of the video `test_videos/project_video.mp4` using the function `process_video()`. Here's a [link to the video result](test_videos_output/project_video.mp4). As can be seen in the video, the pipeline performs reasonably well, unfortunately showing some wobbly lines but no catastrophic failures that would cause the car to drive off the road.
 
 ### Discussion
 
-When applied to the image `test_images/test1.jpg`, the pipeline fails to recognize the right lane line by reaching too far into the adjacent lane:
+When applied to the image `test_images/tree_with_shadow.jpg`, the pipeline fails to recognize the lane lines by reaching too far to the left and right:
 
-![](output_images/test1_LINES.png)
+![](output_images/tree_with_shadow_LINES.png)
 
-A symptom of this failure can be seen in the following intermediate image from the pipeline, where the lane lines are not parallel, i.e. the left lane line correctly describes a right turn whereas the right lane line erroneously describes a left turn:
+A symptom of this failure can be seen in the following intermediate image from the pipeline, where the lane lines are not parallel, i.e. the left lane line describes a left turn whereas the right lane line describes a right turn:
 
-![](output_images/test1_LINES_WITH_SLIDING_WINDOWS.png)
+![](output_images/tree_with_shadow_LINES_WITH_SLIDING_WINDOWS.png)
 
-By comparing the last two images with each other, it can be seen that the derived right lane line is trying to fit the blue pixels (obtained from the `find_lane_pixels()` function), which are not part of the real right lane line but belong to the car on the adjacent lane.
+By comparing the last two images with each other, it can be seen that the derived left lane line is trying to fit the red pixels (obtained from the `find_lane_pixels()` function), which are not part of the real yellow left lane line but belong to the shadow of the tree.
 
-So improving the previous stages of the pipeline which led to the non-parallel lane lines, especially improving the thresholds of the Sobel operator and the thresholds of the S channel, could make the pipeline more robust.
+So further improving the previous stages of the pipeline which led to the non-parallel lane lines, especially improving the thresholds of the Sobel operator and the thresholds of the S channel, could make the pipeline more robust. Searching explicitly for _yellow_ lane lines could also improve the pipeline.
 
 The pipeline also fails miserably at the videos `test_videos/challenge_video.mp4` and `test_videos/harder_challenge_video.mp4`.
 
