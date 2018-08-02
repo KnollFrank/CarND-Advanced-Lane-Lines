@@ -130,20 +130,27 @@ Finally, the function `project_lane_area_onto_undistorted_image()` plots the lan
 
 ### Pipeline (video)
 
-TODO:
-- explain weighted average over n frames
-- explain outlier detection:
-  Ein Bild ist ein Outlier, wenn die abgeleiteten Fahrbahnlinien nicht parallel sind im Gegensatz zur Realität. , d.h. die abgeleitete linke Fahrbahnlinie eine andere Richtung einschlägt als die abgeleitete rechte Fahrbahnlinie.
-
 The pipeline operating on a single image described in the previous sections is applied to each image of the video `test_videos/project_video.mp4` using the function `process_video()`. Here's a [link to the video result](test_videos_output/project_video.mp4).
 
-The following image is a snapshot from the video at second 41:
+The pipeline performs outlier rejection and tries to avoid jitter.
+
+#### Outlier Detection
+
+An image is considered an outlier if the derived lane lines are not parallel in contrast to reality, i.e. the left lane line describes a left turn whereas the right lane line describes a right turn or vice versa.
+
+A lane line is represented by a 2nd order polynomial $f(y) = a y^2 + b y + c$ . The second derivative $f''(y)$ of this polynomial equals $2 a$. If $a<0$ then the lane line describes a left turn else a right turn. This is implemented in the class `OutlierDetector`.
+
+If the current frame of a video is considered an outlier by the `OutlierDetector` then the line detections of the previous frame are used for the current frame.
+
+#### Avoiding Jitter
+
+The detection of lane lines is smoothed over frames by adding each new detection to a weighted average of previous detections where more recent frames are higher weighted than past frames. The weighted average operation is performed using the polynomial coefficients of the lane lines (see function `__average(coeffs)` of class `Pipeline`).
+
+To finally demonstrate the effectiveness of the combination of outlier rejection and smoothing look at the following image snapshot from the video at second 41 and compare it with the single image from the beginning of the section "Discussion":
 
 ![](output_images/tree_with_shadow_from_video.png)
 
-This video snapshot shows exactly the same situation on the road as the single image from the beginning of the section "Discussion". One could wonder why in the video the lane lines are recognized quite good whereas in the single image the lane lines are not recognized at all? The answer is, that in the pipeline for the video the single image is labeled as an outlier (using `OutlierDetector`), because the 2nd order polynomial decribing the left lane line has a negative second derivative (i.e. describes a left turn) and the 2nd order polynomial decribing the right lane line has a positive second derivative (i.e. describes a right turn) which means that the two lane lines are considered to be not parallel by the pipeline which conflicts with reality.
-
-As can be seen in the video, the pipeline performs reasonably well, unfortunately showing some wobbly lines but no catastrophic failures that would cause the car to drive off the road.
+In the video the lane lines are recognized quite good whereas in the single image the lane lines are not recognized at all.
 
 ### Discussion
 
