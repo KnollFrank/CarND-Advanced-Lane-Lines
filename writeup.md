@@ -146,11 +146,11 @@ If the current frame of a video is considered an outlier by the `OutlierDetector
 
 The detection of lane lines is smoothed over frames by adding each new detection to a weighted average of previous detections where more recent frames are higher weighted than past frames. The weighted average operation is performed using the polynomial coefficients of the lane lines (see function `__average(coeffs)` of class `Pipeline`).
 
-To finally demonstrate the effectiveness of the combination of outlier rejection and smoothing look at the following image snapshot from the video at second 41 and compare it with the single image from the beginning of the section "Discussion":
+To finally demonstrate the effectiveness of the combination of outlier rejection and smoothing which is only available in the pipeline processing videos, look at the following image snapshot from the video at second 41 and compare it with the image at the beginning of the section "Discussion":
 
 ![](output_images/tree_with_shadow_from_video.png)
 
-In the video the lane lines are recognized quite good whereas in the single image the lane lines are not recognized at all.
+In the video the lane lines are recognized quite good whereas in the image the lane lines are not recognized at all.
 
 ### Discussion
 
