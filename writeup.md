@@ -132,9 +132,18 @@ Finally, the function `project_lane_area_onto_undistorted_image()` plots the lan
 
 TODO:
 - explain weighted average over n frames
-- explain outlier detection
+- explain outlier detection:
+  Ein Bild ist ein Outlier, wenn die abgeleiteten Fahrbahnlinien nicht parallel sind im Gegensatz zur Realität. , d.h. die abgeleitete linke Fahrbahnlinie eine andere Richtung einschlägt als die abgeleitete rechte Fahrbahnlinie.
 
-The pipeline operating on a single image described in the previous sections is applied to each image of the video `test_videos/project_video.mp4` using the function `process_video()`. Here's a [link to the video result](test_videos_output/project_video.mp4). As can be seen in the video, the pipeline performs reasonably well, unfortunately showing some wobbly lines but no catastrophic failures that would cause the car to drive off the road.
+The pipeline operating on a single image described in the previous sections is applied to each image of the video `test_videos/project_video.mp4` using the function `process_video()`. Here's a [link to the video result](test_videos_output/project_video.mp4).
+
+The following image is a snapshot from the video at second 41:
+
+![](output_images/tree_with_shadow_from_video.png)
+
+This video snapshot shows exactly the same situation on the road as the single image from the beginning of the section "Discussion". One could wonder why in the video the lane lines are recognized quite good whereas in the single image the lane lines are not recognized at all? The answer is, that in the pipeline for the video the single image is labeled as an outlier (using `OutlierDetector`), because the 2nd order polynomial decribing the left lane line has a negative second derivative (i.e. describes a left turn) and the 2nd order polynomial decribing the right lane line has a positive second derivative (i.e. describes a right turn) which means that the two lane lines are considered to be not parallel by the pipeline which conflicts with reality.
+
+As can be seen in the video, the pipeline performs reasonably well, unfortunately showing some wobbly lines but no catastrophic failures that would cause the car to drive off the road.
 
 ### Discussion
 
